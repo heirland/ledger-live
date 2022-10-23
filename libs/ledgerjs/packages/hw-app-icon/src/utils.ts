@@ -19,14 +19,14 @@
 //@flow
 
 type Defer<T> = {
-  promise: Promise<T>,
-  resolve: T,
+  promise: Promise<T>;
+  resolve: T;
   reject: any;
 };
 
 export function defer<T>(): Defer<T> {
   let resolve, reject;
-  let promise = new Promise(function (success, failure) {
+  const promise = new Promise(function (success, failure) {
     resolve = success;
     reject = failure;
   }) as any;
@@ -36,9 +36,9 @@ export function defer<T>(): Defer<T> {
 
 // TODO use bip32-path library
 export function splitPath(path: string): number[] {
-  let result: any = [];
-  let components = path.split("/");
-  components.forEach(element => {
+  const result: any = [];
+  const components = path.split("/");
+  components.forEach((element) => {
     let number = parseInt(element, 10);
     if (isNaN(number)) {
       return; // FIXME shouldn't it throws instead?
@@ -86,7 +86,7 @@ export function asyncWhile<T>(
     if (!predicate()) {
       return result;
     } else {
-      return callback().then(res => {
+      return callback().then((res) => {
         result.push(res);
         return iterate(result);
       });
@@ -96,7 +96,11 @@ export function asyncWhile<T>(
 }
 
 export function hexToBase64(hexString: string) {
-  return btoa((hexString.match(/\w{2}/g) || []).map(function (a) {
-    return String.fromCharCode(parseInt(a, 16));
-  }).join(""));
+  return btoa(
+    (hexString.match(/\w{2}/g) || [])
+      .map(function (a) {
+        return String.fromCharCode(parseInt(a, 16));
+      })
+      .join("")
+  );
 }

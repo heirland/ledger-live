@@ -119,6 +119,7 @@ export const broadcastTransaction = async (transaction, currency) => {
  */
 export const getFees = async (unsigned, account): Promise<BigNumber> => {
   const rpcURL = getRpcUrl(account.currency);
+  /* eslint-disable no-useless-escape */
   const debugRpcUrl = rpcURL
     .split(/\/([^\/]+)$/)
     .slice(0, 2)
@@ -129,7 +130,7 @@ export const getFees = async (unsigned, account): Promise<BigNumber> => {
   try {
     res = await iconService.estimateStep(unsigned).execute();
   } catch (error) {
-  //  console.log(error)
+    // TODO: handle show log
   }
   return new BigNumber(res || 0);
 };
@@ -150,7 +151,7 @@ export const getStepPrice = async (account): Promise<BigNumber> => {
   try {
     res = await iconService.call(stepPriceTx).execute();
   } catch (error) {
-  //  console.log(error)
+    // TODO: handle show log
   }
   return new BigNumber(
     IconAmount.fromLoop(res || 10000000000, IconAmount.Unit.ICX.toString())

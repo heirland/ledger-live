@@ -4,10 +4,13 @@ import type { DatasetTest, CurrenciesData } from "@ledgerhq/types-live";
 import type { Transaction } from "./types";
 import { fromTransactionRaw } from "./transaction";
 import BigNumber from "bignumber.js";
-import { InvalidAddressBecauseDestinationIsAlsoSource, InvalidAddress, NotEnoughBalance } from "@ledgerhq/errors";
+import {
+  InvalidAddressBecauseDestinationIsAlsoSource,
+  InvalidAddress,
+  NotEnoughBalance,
+} from "@ledgerhq/errors";
 
-const TEST_ADDRESS =
-  "hxe52720d9125586e64c745bf3c2c1917dbb46f9ba";
+const TEST_ADDRESS = "hxe52720d9125586e64c745bf3c2c1917dbb46f9ba";
 
 const icon: CurrenciesData<Transaction> = {
   scanAccounts: [
@@ -61,7 +64,8 @@ const icon: CurrenciesData<Transaction> = {
             },
             warnings: {},
           },
-        }, {
+        },
+        {
           name: "Not a valid address",
           transaction: fromTransactionRaw({
             family: "icon",
@@ -93,9 +97,10 @@ const icon: CurrenciesData<Transaction> = {
             },
             warnings: {},
           },
-        },],
+        },
+      ],
     },
-  ]
+  ],
 };
 const dataset: DatasetTest<Transaction> = {
   implementations: ["js"],

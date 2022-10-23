@@ -86,8 +86,7 @@ export async function createSpeculosDevice(
   id: string;
   appPath: string;
 }> {
-  const { model, firmware, appName, appVersion, seed, coinapps, dependency } =
-    arg;
+  const { model, firmware, appName, appVersion, seed, dependency } = arg;
   const speculosID = `speculosID-${++idCounter}`;
   const apduPort = 40000 + idCounter;
   const vncPort = 41000 + idCounter;

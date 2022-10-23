@@ -21,7 +21,6 @@ import { splitPath, foreach, hexToBase64 } from "./utils";
 import type Transport from "@ledgerhq/hw-transport";
 import { UserRefusedOnDevice, UserRefusedAddress } from "@ledgerhq/errors";
 
-
 const CLA = 0xe0;
 const INS = {
   GET_VERSION: 0x06,
@@ -50,7 +49,7 @@ export default class Icx {
         "getAddress",
         "signTransaction",
         "getAppConfiguration",
-        "setTestPrivateKey"
+        "setTestPrivateKey",
       ],
       "ICON"
     );
@@ -68,15 +67,15 @@ export default class Icx {
    */
   getAddress(
     path: string,
-    boolDisplay: boolean = false,
-    boolChaincode: boolean = true
+    boolDisplay = false,
+    boolChaincode = true
   ): Promise<{
-    publicKey: string,
-    address: string,
+    publicKey: string;
+    address: string;
     chainCode?: string;
   }> {
-    let paths = splitPath(path);
-    let buffer = Buffer.alloc(1 + paths.length * 4);
+    const paths = splitPath(path);
+    const buffer = Buffer.alloc(1 + paths.length * 4);
     buffer[0] = paths.length;
     paths.forEach((element, index) => {
       buffer.writeUInt32BE(element, 1 + 4 * index);
@@ -91,12 +90,19 @@ export default class Icx {
         buffer,
         statusList
       )
-      .then(response => {
-        let result: any = {};
-        let publicKeyLength = response[0];
-        result.publicKey = response.slice(1, 1 + publicKeyLength).toString("hex");
-        let addressLength = response[1 + publicKeyLength];
-        result.address = response.slice(1 + publicKeyLength + 1, 1 + publicKeyLength + 1 + addressLength).toString();
+      .then((response) => {
+        const result: any = {};
+        const publicKeyLength = response[0];
+        result.publicKey = response
+          .slice(1, 1 + publicKeyLength)
+          .toString("hex");
+        const addressLength = response[1 + publicKeyLength];
+        result.address = response
+          .slice(
+            1 + publicKeyLength + 1,
+            1 + publicKeyLength + 1 + addressLength
+          )
+          .toString();
         if (boolChaincode) {
           result.chainCode = response.slice(-32).toString("hex");
         }
@@ -127,21 +133,21 @@ export default class Icx {
     path: string,
     rawTxAscii: string
   ): Promise<{
-    signedRawTxBase64: string,
+    signedRawTxBase64: string;
     hashHex: string;
   }> {
-    let paths = splitPath(path);
+    const paths = splitPath(path);
     let offset = 0;
-    let rawTx = Buffer.from(rawTxAscii);
-    let toSend: any = [];
+    const rawTx = Buffer.from(rawTxAscii);
+    const toSend: any = [];
     let response;
     while (offset !== rawTx.length) {
-      let maxChunkSize = offset === 0 ? 150 - 1 - paths.length * 4 - 4 : 150;
-      let chunkSize =
+      const maxChunkSize = offset === 0 ? 150 - 1 - paths.length * 4 - 4 : 150;
+      const chunkSize =
         offset + maxChunkSize > rawTx.length
           ? rawTx.length - offset
           : maxChunkSize;
-      let buffer = Buffer.alloc(
+      const buffer = Buffer.alloc(
         offset === 0 ? 1 + paths.length * 4 + 4 + chunkSize : chunkSize
       );
       if (offset === 0) {
@@ -150,7 +156,12 @@ export default class Icx {
           buffer.writeUInt32BE(element, 1 + 4 * index);
         });
         buffer.writeUInt32BE(rawTx.length, 1 + 4 * paths.length);
-        rawTx.copy(buffer, 1 + 4 * paths.length + 4, offset, offset + chunkSize);
+        rawTx.copy(
+          buffer,
+          1 + 4 * paths.length + 4,
+          offset,
+          offset + chunkSize
+        );
       } else {
         rawTx.copy(buffer, 0, offset, offset + chunkSize);
       }
@@ -159,21 +170,28 @@ export default class Icx {
     }
     return foreach(toSend, (data, i) =>
       this.transport
-        .send(CLA, INS.SIGN, i === 0 ? 0x00 : 0x80, 0x00, data, [SW_OK, SW_CANCEL])
-        .then(apduResponse => {
+        .send(CLA, INS.SIGN, i === 0 ? 0x00 : 0x80, 0x00, data, [
+          SW_OK,
+          SW_CANCEL,
+        ])
+        .then((apduResponse) => {
           response = apduResponse;
         })
     ).then(() => {
       const errorCodeData = response.slice(-2);
       const returnCode = errorCodeData[0] * 0x100 + errorCodeData[1];
-      let result: any = {};
+      const result: any = {};
 
       if (returnCode === SW_CANCEL) {
         throw new UserRefusedOnDevice();
       }
       // r, s, v are aligned sequencially
-      result.signedRawTxBase64 = hexToBase64(response.slice(0, 32 + 32 + 1).toString("hex"));
-      result.hashHex = response.slice(32 + 32 + 1, 32 + 32 + 1 + 32).toString("hex");
+      result.signedRawTxBase64 = hexToBase64(
+        response.slice(0, 32 + 32 + 1).toString("hex")
+      );
+      result.hashHex = response
+        .slice(32 + 32 + 1, 32 + 32 + 1 + 32)
+        .toString("hex");
       return result;
     });
   }
@@ -183,14 +201,14 @@ export default class Icx {
    * @return  major/minor/patch versions of Icon application
    */
   getAppConfiguration(): Promise<{
-    majorVersion: number,
-    minorVersion: number,
+    majorVersion: number;
+    minorVersion: number;
     patchVersion: number;
   }> {
     return this.transport
       .send(CLA, INS.GET_VERSION, 0x00, 0x00)
-      .then(response => {
-        let result: any = {};
+      .then((response) => {
+        const result: any = {};
         result.majorVersion = response[0];
         result.minorVersion = response[1];
         result.patchVersion = response[2];
@@ -210,7 +228,7 @@ export default class Icx {
    * icx.getAddress("0'", false, false).then(o => o.address)
    */
   setTestPrivateKey(privateKeyHex: string) {
-    let data = Buffer.alloc(32);
+    const data = Buffer.alloc(32);
     for (let i = 0; i < privateKeyHex.length; i += 2) {
       data[i / 2] = parseInt(privateKeyHex.substr(i, 2), 16);
     }

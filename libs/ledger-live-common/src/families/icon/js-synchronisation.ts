@@ -22,7 +22,7 @@ const getAccountShape: GetAccountShape = async (info) => {
   const url = getApiUrl(currency);
 
   // get the current account balance state depending your api implementation
-  const { blockHeight, balance, additionalBalance, nonce } = await getAccount(
+  const { blockHeight, balance, additionalBalance } = await getAccount(
     address,
     url
   );

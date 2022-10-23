@@ -20,8 +20,6 @@ const getTransactionStatus = async (
   const warnings: any = {};
   const useAllAmount = !!t.useAllAmount;
 
-
-
   if (!t.fees) {
     errors.fees = new FeeNotLoaded();
   }
