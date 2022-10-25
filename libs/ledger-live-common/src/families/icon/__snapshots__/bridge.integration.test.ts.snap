@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`icon currency bridge scanAccounts icon seed 1 1`] = `
+Array [
+  Object {
+    "balance": "1",
+    "currencyId": "icon",
+    "derivationMode": "icon",
+    "freshAddress": "hxe7d9b90e866f6e724028242018cbd2b2a021867e",
+    "freshAddressPath": "44'/4801368'/0'/0'/0'",
+    "freshAddresses": Array [
+      Object {
+        "address": "hxe7d9b90e866f6e724028242018cbd2b2a021867e",
+        "derivationPath": "44'/4801368'/0'/0'/0'",
+      },
+    ],
+    "iconResources": Object {
+      "additionalBalance": "0",
+      "nonce": 0,
+    },
+    "id": "js:2:icon:hxe7d9b90e866f6e724028242018cbd2b2a021867e:icon",
+    "index": 0,
+    "name": "ICON 1",
+    "nfts": undefined,
+    "operationsCount": 1,
+    "pendingOperations": Array [],
+    "seedIdentifier": "0405fce29d59eb1e39f6794782ceaea05c6ff8586796f64551b1339ac14ddef2b19a881a27a54e0aa7c8dfa5a7fcd52768d69f4b66a93b657cc8e3a578cdf6411f",
+    "spendableBalance": "0",
+    "starred": false,
+    "swapHistory": Array [],
+    "syncHash": undefined,
+    "unitMagnitude": 0,
+    "used": true,
+  },
+  Object {
+    "balance": "0",
+    "currencyId": "icon",
+    "derivationMode": "icon",
+    "freshAddress": "hx05b8cf722a3b77513acf32f0e553ce815bb1fa66",
+    "freshAddressPath": "44'/4801368'/0'/0'/1'",
+    "freshAddresses": Array [
+      Object {
+        "address": "hx05b8cf722a3b77513acf32f0e553ce815bb1fa66",
+        "derivationPath": "44'/4801368'/0'/0'/1'",
+      },
+    ],
+    "iconResources": Object {
+      "additionalBalance": "0",
+      "nonce": 0,
+    },
+    "id": "js:2:icon:hx05b8cf722a3b77513acf32f0e553ce815bb1fa66:icon",
+    "index": 1,
+    "name": "ICON 2",
+    "nfts": undefined,
+    "operationsCount": 0,
+    "pendingOperations": Array [],
+    "seedIdentifier": "0405fce29d59eb1e39f6794782ceaea05c6ff8586796f64551b1339ac14ddef2b19a881a27a54e0aa7c8dfa5a7fcd52768d69f4b66a93b657cc8e3a578cdf6411f",
+    "spendableBalance": "0",
+    "starred": false,
+    "swapHistory": Array [],
+    "syncHash": undefined,
+    "unitMagnitude": 0,
+    "used": false,
+  },
+]
+`;
+
+exports[`icon currency bridge scanAccounts icon seed 1 2`] = `
+Array [
+  Array [
+    Object {
+      "accountId": "js:2:icon:hxe7d9b90e866f6e724028242018cbd2b2a021867e:icon",
+      "blockHash": null,
+      "blockHeight": 57041821,
+      "contract": undefined,
+      "extra": Object {
+        "dataType": "icx",
+        "errorMsg": null,
+        "id": null,
+        "targetContractAddr": null,
+        "txType": "0",
+      },
+      "fee": "0.00125",
+      "hasFailed": false,
+      "hash": "0x08b17adc339cab49b2eb2ddb61194a0c56ab9c76bc17618ebcc8e7275f6f88b4",
+      "id": "js:2:icon:hxe7d9b90e866f6e724028242018cbd2b2a021867e:icon-0x08b17adc339cab49b2eb2ddb61194a0c56ab9c76bc17618ebcc8e7275f6f88b4-IN",
+      "operator": undefined,
+      "recipients": Array [
+        "hxe7d9b90e866f6e724028242018cbd2b2a021867e",
+      ],
+      "senders": Array [
+        "hxd122c413113c0bdd43f78b1b579a687551e2a424",
+      ],
+      "standard": undefined,
+      "tokenId": undefined,
+      "type": "IN",
+      "value": "1",
+    },
+  ],
+  Array [],
+]
+`;
