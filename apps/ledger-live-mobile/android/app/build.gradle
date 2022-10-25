@@ -163,7 +163,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 36176158
-        versionName "3.1.1"
+        versionName "3.9.2"
         resValue "string", "build_config_package", "com.ledger.live"
         testBuildType System.getProperty('testBuildType', 'debug')
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -297,6 +297,13 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
 
     implementation 'com.google.firebase:firebase-analytics'
+
+    implementation('com.google.android.exoplayer:exoplayer:2.13.3') {  // add this line
+        exclude group: 'com.android.support'
+    }
+    implementation('com.google.android.exoplayer:extension-okhttp:2.13.3') { // add this line
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

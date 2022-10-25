@@ -228,7 +228,7 @@ const envDefinitions = {
     desc: "Cardano API url",
   },
   COINAPPS: {
-    def: "",
+    def: "apps",
     parser: stringParser,
     desc: "(dev feature) defines the folder for speculos mode that contains Nano apps binaries (.elf) in a specific structure: <device>/<firmware>/<appName>/app_<appVersion>.elf",
   },
@@ -313,7 +313,7 @@ const envDefinitions = {
     desc: "enable experimental support of Bluetooth",
   },
   EXPERIMENTAL_CURRENCIES: {
-    def: "",
+    def: "icon",
     parser: stringParser,
     desc: "enable experimental support of currencies (comma separated)",
   },
@@ -527,7 +527,7 @@ const envDefinitions = {
     desc: "enable searching accounts in exotic derivation paths",
   },
   SEED: {
-    def: "",
+    def: "walnut carbon stadium dwarf wolf swift addict decide area credit eye couple pledge bridge quiz honey muscle afraid rubber earn put enable congress midnight",
     parser: stringParser,
     desc: "(dev feature) seed to be used by speculos (device simulator)",
   },

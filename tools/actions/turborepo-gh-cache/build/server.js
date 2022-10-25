@@ -68773,9 +68773,9 @@ var require_src2 = __commonJS({
   }
 });
 
-// ../../../node_modules/.pnpm/get-intrinsic@1.1.2/node_modules/get-intrinsic/index.js
+// ../../../node_modules/.pnpm/get-intrinsic@1.1.3/node_modules/get-intrinsic/index.js
 var require_get_intrinsic = __commonJS({
-  "../../../node_modules/.pnpm/get-intrinsic@1.1.2/node_modules/get-intrinsic/index.js"(exports, module2) {
+  "../../../node_modules/.pnpm/get-intrinsic@1.1.3/node_modules/get-intrinsic/index.js"(exports, module2) {
     "use strict";
     var undefined2;
     var $SyntaxError = SyntaxError;
@@ -69010,7 +69010,7 @@ var require_get_intrinsic = __commonJS({
       if (arguments.length > 1 && typeof allowMissing !== "boolean") {
         throw new $TypeError('"allowMissing" argument must be a boolean');
       }
-      if ($exec(/^%?[^%]*%?$/g, name) === null) {
+      if ($exec(/^%?[^%]*%?$/, name) === null) {
         throw new $SyntaxError("`%` may not be present anywhere but at the beginning and end of the intrinsic name");
       }
       var parts = stringToPath(name);

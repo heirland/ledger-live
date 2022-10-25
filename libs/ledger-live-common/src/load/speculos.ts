@@ -86,13 +86,12 @@ export async function createSpeculosDevice(
   id: string;
   appPath: string;
 }> {
-  const { model, firmware, appName, appVersion, seed, coinapps, dependency } =
-    arg;
+  const { model, firmware, appName, appVersion, seed, dependency } = arg;
   const speculosID = `speculosID-${++idCounter}`;
-  const apduPort = 40000 + idCounter;
-  const vncPort = 41000 + idCounter;
-  const buttonPort = 42000 + idCounter;
-  const automationPort = 43000 + idCounter;
+  const apduPort = 40000 ;
+  const vncPort = 41000 ;
+  const buttonPort = 42000 ;
+  const automationPort = 43000 ;
 
   const sdk = inferSDK(firmware, model);
 
@@ -103,7 +102,7 @@ export async function createSpeculosDevice(
   const params = [
     "run",
     "-v",
-    `${coinapps}:/speculos/apps`,
+    `/Users/Corgi/Corgi/workspace/techiast/ledger-live/apps:/speculos/apps`,
     "-p",
     `${apduPort}:40000`,
     "-p",
@@ -116,7 +115,7 @@ export async function createSpeculosDevice(
     `SPECULOS_APPNAME=${appName}:${appVersion}`,
     "--name",
     `${speculosID}`,
-    "ghcr.io/ledgerhq/speculos",
+    "speculos",
     "--model",
     model.toLowerCase(),
     appPath,
