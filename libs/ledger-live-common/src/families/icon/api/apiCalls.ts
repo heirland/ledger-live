@@ -36,7 +36,6 @@ export const getAccountDetails = async (addr: string, url: string) => {
   if (status !== 200) {
     throw Error("Cannot get account details");
   }
-  console.log(addr, balance)
   return {
     balance,
   };

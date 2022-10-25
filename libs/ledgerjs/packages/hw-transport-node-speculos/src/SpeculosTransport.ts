@@ -51,7 +51,7 @@ export default class SpeculosTransport extends Transport {
         // we delay a bit the transport creation to make sure the tcp does not hang up
         setTimeout(() => {
           resolve(new SpeculosTransport(socket, opts));
-        }, 2000);
+        }, 100);
       });
     });
   apduSocket: net.Socket;
