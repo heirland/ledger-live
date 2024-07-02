@@ -55,7 +55,7 @@ describe("ICON API", () => {
       expect(result.length).toBe(2);
       expect(networkMock).toHaveBeenCalledWith({
         method: "GET",
-        url: `testnet-url/transactions/address/${addr}?address=${addr}&skip=${skip}&limit=${10}`,
+        url: `testnet-url/transactions/address/${addr}?skip=${skip}&limit=${10}`,
       });
     });
     it("should recursively fetch operation list correctly", async () => {
@@ -95,11 +95,11 @@ describe("ICON API", () => {
       // Verify the URLs used in the network calls
       expect(networkMock).toHaveBeenCalledWith({
         method: "GET",
-        url: `testnet-url/transactions/address/${addr}?address=${addr}&skip=${skip}&limit=${2}`,
+        url: `testnet-url/transactions/address/${addr}?skip=${skip}&limit=${2}`,
       });
       expect(networkMock).toHaveBeenCalledWith({
         method: "GET",
-        url: `testnet-url/transactions/address/${addr}?address=${addr}&skip=${skip + 2}&limit=${2}`,
+        url: `testnet-url/transactions/address/${addr}?skip=${skip + 2}&limit=${2}`,
       });
     });
   });
