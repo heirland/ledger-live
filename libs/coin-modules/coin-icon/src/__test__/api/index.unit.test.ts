@@ -36,7 +36,7 @@ describe("ICON API", () => {
   });
 
   describe("fetchOperationList", () => {
-    it("should recursively fetch operation list correctly", async () => {
+    it("fetch first page correctly", async () => {
       const accountId = "accountId";
       const addr = "hx123";
       const skip = 0;
